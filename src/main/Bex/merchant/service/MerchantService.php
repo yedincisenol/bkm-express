@@ -1,8 +1,6 @@
 <?php
 namespace Bex\merchant\service;
 
-require __DIR__ . '/../../../../../vendor/autoload.php';
-
 use Bex\config\Configuration;
 use Bex\exceptions\MerchantServiceException;
 use Bex\merchant\request\Builder;
