@@ -1,5 +1,5 @@
 {
-    "name": "bkm-exp/bex2-sdk-php",
+    "name": "enesdayanc/bkm-exp-bex2-sdk-php",
     "type": "library",
     "description": "Bex PHP Client Library",
     "authors": [
