@@ -1,0 +1,33 @@
+{
+    "name": "bkm-exp/bex2-sdk-php",
+    "type": "library",
+    "description": "Bex PHP Client Library",
+    "authors": [
+        {
+            "name": "Bex Developer Team"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Bex": "src/main/"
+        },
+        "psr-4": {
+            "Bex\\": "src/main/Bex"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "BexTest": "src/test/"
+        },
+        "psr-4": {
+            "BexTest\\": "src/test/BexTest"
+        }
+    }
+}
