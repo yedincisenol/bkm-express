@@ -4,18 +4,18 @@ namespace Bex\merchant\response;
 class Installment
 {
 
-    private $numberOfInstallment;
-    private $installmentAmount;
-    private $totalAmount;
-    private $label; //if you not change the installment label you can set null or empty string
+    public $numberOfInstallment;
+    public $installmentAmount;
+    public $totalAmount;
+    public $label; //if you not change the installment label you can set null or empty string
 
-    private $subMerchantName;
-    private $subMerchantId;
-    private $subMerchantPostalCode;
-    private $subMerchantCity;
-    private $subMerchantCountry;
+    public $subMerchantName;
+    public $subMerchantId;
+    public $subMerchantPostalCode;
+    public $subMerchantCity;
+    public $subMerchantCountry;
 
-    private $vposConfig;
+    public $vposConfig;
 
 
     /**

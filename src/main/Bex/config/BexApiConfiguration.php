@@ -17,8 +17,8 @@ class BexApiConfiguration
     const SANDBOX_EXPRESS_JS_URL = "https://test-js.bkmexpress.com.tr/v1/javascripts/bex.js";
     const PRODUCTION_EXPRESS_JS_URL = "https://js.bkmexpress.com.tr/v1/javascripts/bex.js";
 
-    private $baseUrl;
-    private $baseJs;
+    public $baseUrl;
+    public $baseJs;
 
 
     /**

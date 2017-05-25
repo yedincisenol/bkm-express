@@ -5,15 +5,15 @@ use Bex\merchant\token\Token;
 
 class TicketResponse
 {
-    private $code;
-    private $call;
-    private $description;
-    private $message;
-    private $result;
-    private $parameters;
-    private $ticketShortId;
-    private $ticketPath;
-    private $ticketToken;
+    public $code;
+    public $call;
+    public $description;
+    public $message;
+    public $result;
+    public $parameters;
+    public $ticketShortId;
+    public $ticketPath;
+    public $ticketToken;
 
     /**
      * TicketResponse constructor.

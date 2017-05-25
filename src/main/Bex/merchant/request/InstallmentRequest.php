@@ -3,10 +3,10 @@ namespace Bex\merchant\request;
 
 class InstallmentRequest
 {
-    private $binNo;
-    private $totalAmount;
-    private $ticketId;
-    private $signature;
+    public $binNo;
+    public $totalAmount;
+    public $ticketId;
+    public $signature;
 
     /**
      * InstallmentRequest constructor.

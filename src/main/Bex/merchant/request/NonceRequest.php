@@ -5,13 +5,13 @@ namespace Bex\merchant\request;
 class NonceRequest
 {
 
-    private $id;
-    private $path;
-    private $issuer;
-    private $approver;
-    private $token;
-    private $signature;
-    private $reply;
+    public $id;
+    public $path;
+    public $issuer;
+    public $approver;
+    public $token;
+    public $signature;
+    public $reply;
 
 
     /**

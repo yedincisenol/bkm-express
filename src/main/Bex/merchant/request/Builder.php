@@ -5,7 +5,7 @@ use Bex\util\MoneyUtils;
 
 class Builder extends TicketRequest
 {
-    private $ticketRequest;
+    public $ticketRequest;
 
 
     public function __construct($type)

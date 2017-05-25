@@ -5,11 +5,11 @@ namespace Bex\merchant\response\nonce;
 
 class TicketResult
 {
-     private $bkmTokenId;
-     private $totalAmount;
-     private $installmentCount;
-     private $cardFirst6;
-     private $cardLast4;
+     public $bkmTokenId;
+     public $totalAmount;
+     public $installmentCount;
+     public $cardFirst6;
+     public $cardLast4;
 
     /**
      * TicketResult constructor.

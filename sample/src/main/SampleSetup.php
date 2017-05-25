@@ -24,18 +24,18 @@ class SampleSetup
     const CUSTOM_INSTALLMENT_URL = "http://bex-demo-php.finartz.com/customController.php?installment=custom";
     const NONCE_URL = "http://bex-demo-php.finartz.com/customController.php?nonce=custom";
 
-    private $success;
-    private $amount ;
-    private $baseJsUrl ;
-    private $ticketId ;
-    private $ticketPath ;
-    private $ticketToken ;
-    private $merchantToken ;
-    private $config ;
-    private $connectionId;
-    private $baseUrl;
+    public $success;
+    public $amount ;
+    public $baseJsUrl ;
+    public $ticketId ;
+    public $ticketPath ;
+    public $ticketToken ;
+    public $merchantToken ;
+    public $config ;
+    public $connectionId;
+    public $baseUrl;
     public $customData;
-    private $merchantNonceResponseData;
+    public $merchantNonceResponseData;
 
 
     /**

@@ -9,20 +9,20 @@ use Bex\merchant\response\nonce\TicketResult;
 
 class PaymentResultResponse
 {
-    private $code;
-    private $call;
-    private $description;
-    private $message;
-    private $result;
-    private $parameters;
-    private $bkmTokenId;
-    private $totalAmount;
-    private $installmentCount;
-    private $cardFirst6;
-    private $cardLast4;
-    private $paymentPurchased;
-    private $status;
-    private $posResult;
+    public $code;
+    public $call;
+    public $description;
+    public $message;
+    public $result;
+    public $parameters;
+    public $bkmTokenId;
+    public $totalAmount;
+    public $installmentCount;
+    public $cardFirst6;
+    public $cardLast4;
+    public $paymentPurchased;
+    public $status;
+    public $posResult;
 
     /**
      * PaymentResultResponse constructor.

@@ -8,9 +8,9 @@ namespace Bex\merchant\response;
 
 class TicketRefresh
 {
-    private $id;
-    private $path;
-    private $token;
+    public $id;
+    public $path;
+    public $token;
 
     /**
      * TicketRefresh constructor.

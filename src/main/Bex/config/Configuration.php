@@ -5,10 +5,10 @@ use Bex\enums\Environment;
 
 class Configuration
 {
-    private $environment;
-    private $merchantId;
-    private $merchantPrivateKey;
-    private $bexApiConfiguration;
+    public $environment;
+    public $merchantId;
+    public $merchantPrivateKey;
+    public $bexApiConfiguration;
 
 
     /**

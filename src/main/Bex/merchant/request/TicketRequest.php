@@ -4,11 +4,11 @@ namespace Bex\merchant\request;
 
 class TicketRequest
 {
-    private $type;
-    private $installmentUrl;
-    private $nonceUrl;
-    private $amount ;
-    private $orderId;
+    public $type;
+    public $installmentUrl;
+    public $nonceUrl;
+    public $amount ;
+    public $orderId;
 
     /**
      * @return mixed

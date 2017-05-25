@@ -5,11 +5,11 @@ namespace Bex\merchant\request;
 
 class NonceData
 {
-    private  $ticketId;
-    private  $orderId;
-    private  $totalAmount;
-    private  $totalAmountWithInstallmentCharge;
-    private  $numberOfInstallments;
+    public  $ticketId;
+    public  $orderId;
+    public  $totalAmount;
+    public  $totalAmountWithInstallmentCharge;
+    public  $numberOfInstallments;
 
 
     /**

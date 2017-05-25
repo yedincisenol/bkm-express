@@ -3,10 +3,10 @@ namespace Bex\merchant\response\nonce;
 
 class MerchantNonceResponse
 {
-    private $result;
-    private $nonce;
-    private $id;
-    private $message;
+    public $result;
+    public $nonce;
+    public $id;
+    public $message;
 
     /**
      * @return mixed

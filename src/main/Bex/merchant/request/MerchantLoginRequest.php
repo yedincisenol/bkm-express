@@ -3,8 +3,8 @@ namespace Bex\merchant\request;
 
 class MerchantLoginRequest
 {
-    private $name;
-    private $password;
+    public $name;
+    public $password;
 
     /**
      * MerchantLoginRequest constructor.

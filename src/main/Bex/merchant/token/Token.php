@@ -4,9 +4,9 @@ namespace Bex\merchant\token;
 
 class Token
 {
-    private $shortId;
-    private $path;
-    private $token;
+    public $shortId;
+    public $path;
+    public $token;
 
     /**
      * Token constructor.

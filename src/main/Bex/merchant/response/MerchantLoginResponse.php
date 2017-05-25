@@ -5,16 +5,16 @@ use Bex\merchant\token\Token;
 
 class MerchantLoginResponse
 {
-    private $code;
-    private $call;
-    private $description;
-    private $message;
-    private $result;
-    private $parameters;
-    private $shortId;
-    private $path;
-    private $token;
-    private $connectionToken;
+    public $code;
+    public $call;
+    public $description;
+    public $message;
+    public $result;
+    public $parameters;
+    public $shortId;
+    public $path;
+    public $token;
+    public $connectionToken;
 
     /**
      * MerchantLoginResponse constructor.

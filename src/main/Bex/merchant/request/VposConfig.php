@@ -4,11 +4,11 @@ namespace Bex\merchant\request;
 class VposConfig
 {
 
-    private $vposUserId;
-    private $vposPassword;
-    private $extra = array();
-    private $bankIndicator;
-    private $serviceUrl;
+    public $vposUserId;
+    public $vposPassword;
+    public $extra = array();
+    public $bankIndicator;
+    public $serviceUrl;
 
     /**
      * VposConfig constructor.

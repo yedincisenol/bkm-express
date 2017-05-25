@@ -11,13 +11,13 @@ namespace Bex\merchant\response\nonce;
 
 class PosResult
 {
-    private $orderId;
-    private $authCode;
-    private $posResponse;
-    private $posResultCode;
-    private $referenceNumber;
-    private $posTransactionId;
-    private $posBank;
+    public $orderId;
+    public $authCode;
+    public $posResponse;
+    public $posResultCode;
+    public $referenceNumber;
+    public $posTransactionId;
+    public $posBank;
 
     /**
      * PosResult constructor.
