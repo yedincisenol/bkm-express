@@ -162,11 +162,13 @@ class MerchantService
      * @param $ticketId
      * @param $connectionToken
      * @param $nonceToken
+     * @param bool $returnCurlResponse
      * @return NonceResultResponse
+     * @internal param bool $returnRequestResponse
      */
-    public function sendNonceResponse(MerchantNonceResponse $response, $connectionId, $ticketId, $connectionToken, $nonceToken)
+    public function sendNonceResponse(MerchantNonceResponse $response, $connectionId, $ticketId, $connectionToken, $nonceToken, $returnCurlResponse = false)
     {
-        return $this->nonce($response, $connectionId, $ticketId, $connectionToken,$nonceToken);
+        return $this->nonce($response, $connectionId, $ticketId, $connectionToken,$nonceToken, $returnCurlResponse);
     }
 
 
@@ -176,24 +178,30 @@ class MerchantService
      * @param $ticketId
      * @param $connectionToken
      * @param $nonceToken
+     * @param bool $returnCurlResponse
      * @return NonceResultResponse
      * @throws MerchantServiceException
      */
-    public function nonce($requestBody, $connectionId, $ticketId, $connectionToken, $nonceToken)
+    public function nonce($requestBody, $connectionId, $ticketId, $connectionToken, $nonceToken, $returnCurlResponse = false)
     {
         $requestBody = $this->encodeMerchantNonceRequestObjectToJson($requestBody);
         try {
             $client = new Client();
             $res = $client->request('POST', $this->getMerchantNonceUrl($connectionId,$ticketId), $this->postRequestOptionsWithNonceTokenAndToken($requestBody, $connectionToken,$nonceToken));
-            if ($res->getStatusCode() === 200) {
-                $bodyData = json_decode($res->getBody()->getContents(), true);
-                return new NonceResultResponse(
-                    $bodyData['code'],$bodyData['call'],
-                    $bodyData['description'],$bodyData['message'],$bodyData['result'],
-                    $bodyData['parameters'], $bodyData['data']['bkmTokenId'],$bodyData['data']['totalAmount'],
-                    $bodyData['data']['installmentCount'],$bodyData['data']['cardFirst6'],$bodyData['data']['cardLast4'],
-                    $bodyData['data']['paymentPurchased'],$bodyData['data']['status'],$bodyData['data']['posResult'],$bodyData['data']['error']
-                );
+
+            if ($returnCurlResponse) {
+                return $res;
+            } else {
+                if ($res->getStatusCode() === 200) {
+                    $bodyData = json_decode($res->getBody()->getContents(), true);
+                    return new NonceResultResponse(
+                        $bodyData['code'],$bodyData['call'],
+                        $bodyData['description'],$bodyData['message'],$bodyData['result'],
+                        $bodyData['parameters'], $bodyData['data']['bkmTokenId'],$bodyData['data']['totalAmount'],
+                        $bodyData['data']['installmentCount'],$bodyData['data']['cardFirst6'],$bodyData['data']['cardLast4'],
+                        $bodyData['data']['paymentPurchased'],$bodyData['data']['status'],$bodyData['data']['posResult'],$bodyData['data']['error']
+                    );
+                }
             }
         } catch (HttpRequestException $exception) {
             throw new MerchantServiceException($exception->getMessage());
