@@ -1,29 +1,32 @@
 <?php
 
+
 namespace Bex\merchant\response;
 
+
 use Bex\merchant\response\nonce\PosResult;
+use Bex\merchant\response\nonce\TicketResult;
 
 class PaymentResultResponse
 {
-    public $code;
-    public $call;
-    public $description;
-    public $message;
-    public $result;
-    public $parameters;
-    public $bkmTokenId;
-    public $totalAmount;
-    public $installmentCount;
-    public $cardFirst6;
-    public $cardLast4;
-    public $paymentPurchased;
-    public $status;
-    public $posResult;
+    private $code;
+    private $call;
+    private $description;
+    private $message;
+    private $result;
+    private $parameters;
+    private $bkmTokenId;
+    private $totalAmount;
+    private $installmentCount;
+    private $cardFirst6;
+    private $cardLast4;
+    private $paymentPurchased;
+    private $status;
+    private $posResult;
+    private $cardHash;
 
     /**
      * PaymentResultResponse constructor.
-     *
      * @param $code
      * @param $call
      * @param $description
@@ -38,8 +41,9 @@ class PaymentResultResponse
      * @param $paymentPurchased
      * @param $status
      * @param $posResult
+     * @param $cardHash
      */
-    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult)
+    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult,$cardHash)
     {
         $this->code = $code;
         $this->call = $call;
@@ -54,10 +58,11 @@ class PaymentResultResponse
         $this->cardLast4 = $cardLast4;
         $this->paymentPurchased = $paymentPurchased;
         $this->status = $status;
+        $this->cardHash = $cardHash;
         $this->posResult = new PosResult($posResult);
-
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -282,4 +287,22 @@ class PaymentResultResponse
     {
         $this->posResult = $posResult;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCardHash()
+    {
+        return $this->cardHash;
+    }
+
+    /**
+     * @param mixed $cardHash
+     */
+    public function setCardHash($cardHash)
+    {
+        $this->cardHash = $cardHash;
+    }
+
+
 }

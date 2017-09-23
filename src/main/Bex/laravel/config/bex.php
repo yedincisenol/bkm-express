@@ -9,6 +9,7 @@ return [
     'bank_bin'              => env('BEX_POS_BANK_BIN'),
     'environment'           => env('BEX_ENVIRONMENT'),
     'nonce_path'            => env('BEX_NONCE_PATH'),
+    'aggreement_path'       => env('BEX_AGGREEMENT_PATH'),
     'pos'                   => [
         'user_id'           => env('BEX_POS_USER_ID'),
         'password'          => env('BEX_POS_PASSWORD'),

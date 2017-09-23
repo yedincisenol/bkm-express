@@ -1,19 +1,19 @@
 <?php
 /**
- * TicketRefresh.
+ * TicketRefresh
  */
 
 namespace Bex\merchant\response;
 
+
 class TicketRefresh
 {
-    public $id;
-    public $path;
-    public $token;
+    private $id;
+    private $path;
+    private $token;
 
     /**
      * TicketRefresh constructor.
-     *
      * @param $id
      * @param $path
      * @param $token
@@ -23,9 +23,9 @@ class TicketRefresh
         $this->id = $id;
         $this->path = $path;
         $this->token = $token;
-
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -74,4 +74,6 @@ class TicketRefresh
     {
         $this->token = $token;
     }
+
+
 }

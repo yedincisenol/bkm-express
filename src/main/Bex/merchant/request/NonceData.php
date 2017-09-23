@@ -2,17 +2,21 @@
 
 namespace Bex\merchant\request;
 
+
+use Bex\merchant\request\address\Address;
+
 class NonceData
 {
-    public $ticketId;
-    public $orderId;
-    public $totalAmount;
-    public $totalAmountWithInstallmentCharge;
-    public $numberOfInstallments;
+    private $ticketId;
+    private $orderId;
+    private $totalAmount;
+    private $totalAmountWithInstallmentCharge;
+    private $numberOfInstallments;
+    private $deliveryAddress;
+    private $billingAddress;
 
     /**
      * NonceData constructor.
-     *
      * @param $reply
      */
     public function __construct($reply)
@@ -22,9 +26,11 @@ class NonceData
         $this->totalAmount = $reply['totalAmount'];
         $this->totalAmountWithInstallmentCharge = $reply['totalAmountWithInstallmentCharge'];
         $this->numberOfInstallments = $reply['numberOfInstallments'];
-
+        $this->deliveryAddress = new Address(@$reply['deliveryAddress']);
+        $this->billingAddress = new Address(@$reply['billingAddress']);
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -105,4 +111,37 @@ class NonceData
     {
         $this->numberOfInstallments = $numberOfInstallments;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @param mixed $deliveryAddress
+     */
+    public function setDeliveryAddress($deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * @param mixed $billingAddress
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace Bex\Laravel;
 
 use Bex\config\BexPayment;
+use Bex\merchant\request\Builder;
 use Bex\merchant\request\InstallmentRequest;
 use Bex\merchant\request\NonceRequest;
 use Bex\merchant\request\VposConfig;
@@ -68,18 +69,27 @@ class BexClient
 
     /**
      * @param $amount
-     *
-     * @return mixed
+     * @param $nonceUrl
+     * @param $aggreementUrl
+     * @param null $installmentUrl
+     * @param bool $addressEnabled
+     * @return $this
      */
-    public function init($amount)
+    public function init($amount, $nonceUrl, $aggreementUrl ,$installmentUrl = null, $addressEnabled = false)
     {
+
         //BKM Config
         $this->bkmConfig = $this->config();
         $merchantService = $this->merchantService($this->bkmConfig);
         $connectionToken = $merchantService->login()->getToken();
-        $this->ticket = $merchantService->oneTimeTicketWithoutInstallmentUrlWithNonce(
-            $connectionToken, $amount, url(config('bex.nonce_path'))
-        );
+        $builder = Builder::newPayment('payment');
+        $builder->setAmount($amount);
+        $builder->setInstallmentUrl($installmentUrl);
+        $builder->setNonceUrl($nonceUrl);
+        $builder->setAddress($addressEnabled);
+        $builder->setAgreementUrl($aggreementUrl);
+
+        $this->ticket = $merchantService->createOneTimeTicket($builder, $connectionToken);
 
         return $this;
     }
@@ -101,9 +111,9 @@ class BexClient
             $ticketID
         );
 
-        if ($paymentStatus->status == 'ok' &&
-            $paymentStatus->posResult->orderId &&
-            $paymentStatus->paymentPurchased == 1) {
+        if ($paymentStatus->getStatus() == 'ok' &&
+            $paymentStatus->getPosResult()->getOrderId() &&
+            $paymentStatus->getPaymentPurchased() == 1) {
             return true;
         }
 
@@ -141,10 +151,10 @@ class BexClient
     {
         $posConfig = $this->posConfig();
 
-        $installmentAmount = \Bex\util\MoneyUtils::toFloat($installmentRequest->getTotalAmount());
-        $installmentAmount = \Bex\util\MoneyUtils::formatTurkishLira($installmentAmount);
+        $installmentAmount = MoneyUtils::toFloat($installmentRequest->getTotalAmount());
+        $installmentAmount = MoneyUtils::formatTurkishLira($installmentAmount);
 
-        $installment = new \Bex\merchant\response\Installment(
+        $installment = new Installment(
             1, $installmentAmount, '', $installmentRequest->getTotalAmount(), $posConfig
         );
 
@@ -191,7 +201,7 @@ class BexClient
         foreach ($bins as $bin) {
             list($binCode, $bankBin) = explode('@', $binAndBank);
             $installments = $this->installment($installmentRequest);
-            $binAndInstallments = new \Bex\merchant\response\BinAndInstallments();
+            $binAndInstallments = new BinAndInstallments();
             $installmentResponse = new InstallmentsResponse();
             $installmentResponse->setInstallments($installments);
             $installmentResponse->setStatus('ok');
@@ -233,12 +243,15 @@ class BexClient
      * @param $token
      * @param $signature
      * @param $reply
+     * @param $hash
+     * @param $tcknMath
+     * @param $msisdnMatch
      *
      * @return NonceRequest
      */
-    public function nonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply)
+    public function nonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply, $hash, $tcknMath, $msisdnMatch)
     {
-        return new NonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply);
+        return new NonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply,  $hash, $tcknMath, $msisdnMatch);
     }
 
     /**
@@ -258,7 +271,9 @@ class BexClient
         $nonceResponse->setNonce($request->getToken());
         $nonceResponse->setId($request->getPath());
         $nonceResponse->setMessage($message);
-        $merchantService->sendNonceResponse($nonceResponse, $merchantResponse->getPath(), $request->getPath(), $merchantResponse->getConnectionToken(), $request->getToken());
+        $merchantService->sendNonceResponse($nonceResponse, $merchantResponse->getPath(),
+            $request->getPath(), $merchantResponse->getConnectionToken(), $request->getToken()
+        );
 
         return $nonceResponse;
     }

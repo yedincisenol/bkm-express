@@ -1,23 +1,23 @@
 <?php
-
 namespace Bex\config;
 
 use Bex\enums\Environment;
 
 class Configuration
 {
-    public $environment;
-    public $merchantId;
-    public $merchantPrivateKey;
-    public $bexApiConfiguration;
+    private $environment;
+    private $merchantId;
+    private $merchantPrivateKey;
+    private $bexApiConfiguration;
+
 
     /**
      * Configuration constructor.
-     *
      * @param $environment
      * @param $merchantId
      * @param $merchantPrivateKey
      */
+
     public function __construct($environment, $merchantId, $merchantPrivateKey)
     {
         $this->environment = $environment;
@@ -25,6 +25,7 @@ class Configuration
         $this->merchantPrivateKey = $merchantPrivateKey;
         $this->bexApiConfiguration = new BexApiConfiguration($environment);
     }
+
 
     /**
      * @return Environment
@@ -41,6 +42,7 @@ class Configuration
     {
         $this->environment = $environment;
     }
+
 
     /**
      * @return mixed
@@ -74,6 +76,7 @@ class Configuration
         $this->merchantPrivateKey = $merchantPrivateKey;
     }
 
+
     /**
      * @return BexApiConfiguration
      */
@@ -89,4 +92,6 @@ class Configuration
     {
         $this->bexApiConfiguration = $bexApiConfiguration;
     }
+
+
 }

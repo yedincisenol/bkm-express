@@ -6,4 +6,5 @@ use Exception;
 
 class BexException extends Exception
 {
+
 }

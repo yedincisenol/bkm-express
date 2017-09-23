@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(dirname(__DIR__))).'/src/main/Bex/Bex.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/src/main/OldBex/Bex.php';
 
 use Bex\config\BexPayment;
 use Bex\enums\Banks;

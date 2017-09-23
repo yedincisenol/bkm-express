@@ -3,24 +3,24 @@
  * Created by IntelliJ IDEA.
  * User: mrpehlivan
  * Date: 20/01/2017
- * Time: 14:24.
+ * Time: 14:24
  */
 
 namespace Bex\merchant\response\nonce;
 
+
 class PosResult
 {
-    public $orderId;
-    public $authCode;
-    public $posResponse;
-    public $posResultCode;
-    public $referenceNumber;
-    public $posTransactionId;
-    public $posBank;
+    private $orderId;
+    private $authCode;
+    private $posResponse;
+    private $posResultCode;
+    private $referenceNumber;
+    private $posTransactionId;
+    private $posBank;
 
     /**
      * PosResult constructor.
-     *
      * @param $orderId
      * @param $authCode
      * @param $posResponse
@@ -31,14 +31,15 @@ class PosResult
      */
     public function __construct($posResult)
     {
-        $this->orderId = $posResult['orderId'];
-        $this->authCode = $posResult['authCode'];
-        $this->posResponse = $posResult['posResponse'];
-        $this->posResultCode = $posResult['posResultCode'];
-        $this->referenceNumber = $posResult['referenceNumber'];
-        $this->posTransactionId = $posResult['posTransactionId'];
-        $this->posBank = $posResult['posBank'];
+        $this->orderId = $posResult["orderId"];
+        $this->authCode = $posResult["authCode"];
+        $this->posResponse = $posResult["posResponse"];
+        $this->posResultCode = $posResult["posResultCode"];
+        $this->referenceNumber = $posResult["referenceNumber"];
+        $this->posTransactionId = $posResult["posTransactionId"];
+        $this->posBank = $posResult["posBank"];
     }
+
 
     /**
      * @return mixed
@@ -151,4 +152,6 @@ class PosResult
     {
         $this->posBank = $posBank;
     }
+
+
 }

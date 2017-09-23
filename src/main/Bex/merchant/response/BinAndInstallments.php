@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Bex\merchant\response;
+
 
 class BinAndInstallments
 {
@@ -21,4 +23,6 @@ class BinAndInstallments
     {
         $this->installments = $installments;
     }
+
+
 }

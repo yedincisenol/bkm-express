@@ -1,13 +1,12 @@
 <?php
-
 namespace Bex\merchant\response\nonce;
 
 class MerchantNonceResponse
 {
-    public $result;
-    public $nonce;
-    public $id;
-    public $message;
+    private $result;
+    private $nonce;
+    private $id;
+    private $message;
 
     /**
      * @return mixed
@@ -72,4 +71,6 @@ class MerchantNonceResponse
     {
         $this->id = $id;
     }
+
+
 }

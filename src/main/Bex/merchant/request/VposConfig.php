@@ -1,14 +1,15 @@
 <?php
-
 namespace Bex\merchant\request;
 
 class VposConfig
 {
-    public $vposUserId;
-    public $vposPassword;
-    public $extra = [];
-    public $bankIndicator;
-    public $serviceUrl;
+
+    private $vposUserId;
+    private $vposPassword;
+    private $extra = array();
+    private $bankIndicator;
+    private $serviceUrl;
+    private $preAuth;
 
     /**
      * VposConfig constructor.
@@ -17,23 +18,20 @@ class VposConfig
     {
     }
 
-    public function addSubMerchantForFinans($subMerchantName, $subMerchantId, $subMerchantPostalCode, $subMerchantCity, $subMerchantCountry)
-    {
-        $this->addExtra('subMerchantName', $subMerchantName);
-        $this->addExtra('subMerchantId', $subMerchantId);
-        $this->addExtra('subMerchantPostalCode', $subMerchantPostalCode);
-        $this->addExtra('subMerchantCity', $subMerchantCity);
-        $this->addExtra('subMerchantCountry', $subMerchantCountry);
-
+    public function addSubMerchantForFinans($subMerchantName,$subMerchantId,$subMerchantPostalCode,$subMerchantCity,$subMerchantCountry){
+        $this->addExtra("subMerchantName",$subMerchantName);
+        $this->addExtra("subMerchantId",$subMerchantId);
+        $this->addExtra("subMerchantPostalCode",$subMerchantPostalCode);
+        $this->addExtra("subMerchantCity",$subMerchantCity);
+        $this->addExtra("subMerchantCountry",$subMerchantCountry);
         return $this;
     }
 
-    public function addSubMerchant($subMerchantName)
-    {
-        $this->addExtra('subMerchantName', $subMerchantName);
-
+    public function addSubMerchant($subMerchantName){
+        $this->addExtra("subMerchantName",$subMerchantName);
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -83,6 +81,7 @@ class VposConfig
         $this->extra = $extra;
     }
 
+
     /**
      * @return mixed
      */
@@ -115,8 +114,29 @@ class VposConfig
         $this->serviceUrl = $serviceUrl;
     }
 
+
     public function addExtra($key, $value)
     {
         $this->extra[$key] = $value;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPreAuth()
+    {
+        return $this->preAuth;
+    }
+
+    /**
+     * @param mixed $preAuth
+     */
+    public function setPreAuth($preAuth)
+    {
+        $this->preAuth = $preAuth;
+    }
+
+
+
+
 }

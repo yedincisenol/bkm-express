@@ -22,7 +22,7 @@ class BexServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config/bex.php' => config_path('bex.php'),
-        ]);
+        ], 'config');
     }
 
     /**

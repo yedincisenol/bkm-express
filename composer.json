@@ -22,7 +22,7 @@
             "Bex": "src/main/"
         },
         "psr-4": {
-            "Bex\\": "src/main/Bex"
+            "Bex\\": "src/main/OldBex"
         }
     },
     "autoload-dev": {

@@ -6,4 +6,5 @@ use Exception;
 
 class EncryptionException extends Exception
 {
+
 }

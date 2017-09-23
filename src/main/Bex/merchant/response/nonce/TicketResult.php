@@ -2,17 +2,17 @@
 
 namespace Bex\merchant\response\nonce;
 
+
 class TicketResult
 {
-    public $bkmTokenId;
-    public $totalAmount;
-    public $installmentCount;
-    public $cardFirst6;
-    public $cardLast4;
+     private $bkmTokenId;
+     private $totalAmount;
+     private $installmentCount;
+     private $cardFirst6;
+     private $cardLast4;
 
     /**
      * TicketResult constructor.
-     *
      * @param $bkmTokenId
      * @param $totalAmount
      * @param $installmentCount
@@ -21,12 +21,13 @@ class TicketResult
      */
     public function __construct($ticket)
     {
-        $this->bkmTokenId = $ticket['bkmTokenId'];
-        $this->totalAmount = $ticket['totalAmount'];
-        $this->installmentCount = $ticket['installmentCount'];
-        $this->cardFirst6 = $ticket['cardFirst6'];
-        $this->cardLast4 = $ticket['cardLast4'];
+        $this->bkmTokenId = $ticket["bkmTokenId"];
+        $this->totalAmount = $ticket["totalAmount"];
+        $this->installmentCount = $ticket["installmentCount"];
+        $this->cardFirst6 = $ticket["cardFirst6"];
+        $this->cardLast4 = $ticket["cardLast4"];
     }
+
 
     /**
      * @return mixed
@@ -107,4 +108,6 @@ class TicketResult
     {
         $this->cardLast4 = $cardLast4;
     }
+
+
 }

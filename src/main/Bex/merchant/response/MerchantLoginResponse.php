@@ -1,25 +1,23 @@
 <?php
-
 namespace Bex\merchant\response;
 
 use Bex\merchant\token\Token;
 
 class MerchantLoginResponse
 {
-    public $code;
-    public $call;
-    public $description;
-    public $message;
-    public $result;
-    public $parameters;
-    public $shortId;
-    public $path;
-    public $token;
-    public $connectionToken;
+    private $code;
+    private $call;
+    private $description;
+    private $message;
+    private $result;
+    private $parameters;
+    private $shortId;
+    private $path;
+    private $token;
+    private $connectionToken;
 
     /**
      * MerchantLoginResponse constructor.
-     *
      * @param $code
      * @param $call
      * @param $description
@@ -38,12 +36,13 @@ class MerchantLoginResponse
         $this->message = $message;
         $this->result = $result;
         $this->parameters = $parameters;
-        $token = new Token($shortId, $path, $token);
+        $token = new Token($shortId,$path,$token);
         $this->shortId = $token->getShortId();
         $this->path = $token->getPath();
         $this->token = $token;
         $this->connectionToken = $token->getToken();
     }
+
 
     /**
      * @return mixed
@@ -204,4 +203,7 @@ class MerchantLoginResponse
     {
         $this->connectionToken = $connectionToken;
     }
+
+
+
 }

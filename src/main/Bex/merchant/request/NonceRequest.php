@@ -4,17 +4,21 @@ namespace Bex\merchant\request;
 
 class NonceRequest
 {
-    public $id;
-    public $path;
-    public $issuer;
-    public $approver;
-    public $token;
-    public $signature;
-    public $reply;
+
+    private $id;
+    private $path;
+    private $issuer;
+    private $approver;
+    private $token;
+    private $signature;
+    private $reply;
+    private $hash;
+    private $tcknMath;
+    private $msisdnMatch;
+
 
     /**
      * NonceRequest constructor.
-     *
      * @param $id
      * @param $path
      * @param $issuer
@@ -22,8 +26,11 @@ class NonceRequest
      * @param $token
      * @param $signature
      * @param $reply
+     * @param $hash
+     * @param $tcknMatch
+     * @param $msisdnMatch
      */
-    public function __construct($id, $path, $issuer, $approver, $token, $signature, $reply)
+    public function __construct($id, $path, $issuer, $approver, $token, $signature, $reply, $hash, $tcknMatch, $msisdnMatch)
     {
         $this->id = $id;
         $this->path = $path;
@@ -33,9 +40,13 @@ class NonceRequest
         $this->signature = $signature;
         $this->reply = $reply;
         $this->reply = new NonceData($reply);
+        $this->hash = $hash;
+        $this->tcknMath = $tcknMatch;
+        $this->msisdnMatch = $msisdnMatch;
 
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -53,6 +64,7 @@ class NonceRequest
         return $this->reply->getOrderId();
     }
 
+
     /**
      * @return mixed
      */
@@ -60,6 +72,7 @@ class NonceRequest
     {
         return $this->reply->getTotalAmount();
     }
+
 
     /**
      * @return mixed
@@ -76,6 +89,7 @@ class NonceRequest
     {
         return $this->reply->getTotalAmountWithInstallmentCharge();
     }
+
 
     /**
      * @return mixed
@@ -187,5 +201,85 @@ class NonceRequest
     public function setReply($reply)
     {
         $this->reply = $reply;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param mixed $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTcknMath()
+    {
+        return $this->tcknMath;
+    }
+
+    /**
+     * @param mixed $tcknMath
+     */
+    public function setTcknMath($tcknMath)
+    {
+        $this->tcknMath = $tcknMath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMsisdnMatch()
+    {
+        return $this->msisdnMatch;
+    }
+
+    /**
+     * @param mixed $msisdnMatch
+     */
+    public function setMsisdnMatch($msisdnMatch)
+    {
+        $this->msisdnMatch = $msisdnMatch;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->reply->getDeliveryAddress();
+    }
+
+    /**
+     * @param mixed $deliveryAddress
+     */
+    public function setDeliveryAddress($deliveryAddress)
+    {
+        $this->reply->setDeliveryAddress($deliveryAddress);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBillingAddress()
+    {
+        return $this->reply->getBillingAddress();
+    }
+
+    /**
+     * @param mixed $billingAddress
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->reply->setBillingAddress($billingAddress);
     }
 }

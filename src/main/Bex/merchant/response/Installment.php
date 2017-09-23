@@ -1,25 +1,25 @@
 <?php
-
 namespace Bex\merchant\response;
 
 class Installment
 {
-    public $numberOfInstallment;
-    public $installmentAmount;
-    public $totalAmount;
-    public $label; //if you not change the installment label you can set null or empty string
 
-    public $subMerchantName;
-    public $subMerchantId;
-    public $subMerchantPostalCode;
-    public $subMerchantCity;
-    public $subMerchantCountry;
+    private $numberOfInstallment;
+    private $installmentAmount;
+    private $totalAmount;
+    private $label; //if you not change the installment label you can set null or empty string
 
-    public $vposConfig;
+    private $subMerchantName;
+    private $subMerchantId;
+    private $subMerchantPostalCode;
+    private $subMerchantCity;
+    private $subMerchantCountry;
+
+    private $vposConfig;
+
 
     /**
      * Installment constructor.
-     *
      * @param $numberOfInstallment
      * @param $installmentAmount
      * @param $label
@@ -34,6 +34,7 @@ class Installment
         $this->totalAmount = $totalAmount;
         $this->vposConfig = $vposConfig;
     }
+
 
     /**
      * @return mixed
@@ -98,6 +99,8 @@ class Installment
     {
         $this->label = $label;
     }
+
+
 
     /**
      * @return mixed
@@ -194,4 +197,6 @@ class Installment
     {
         $this->subMerchantCountry = $subMerchantCountry;
     }
+
+
 }

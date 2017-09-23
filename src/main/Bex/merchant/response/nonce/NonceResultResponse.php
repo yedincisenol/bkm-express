@@ -3,32 +3,35 @@
  * Created by IntelliJ IDEA.
  * User: mrpehlivan
  * Date: 19/01/2017
- * Time: 15:55.
+ * Time: 15:55
  */
 
 namespace Bex\merchant\response\nonce;
 
+
+use Bex\merchant\response\PaymentResultResponse;
+
 class NonceResultResponse
 {
-    public $code;
-    public $call;
-    public $description;
-    public $message;
-    public $result;
-    public $parameters;
-    public $bkmTokenId;
-    public $totalAmount;
-    public $installmentCount;
-    public $cardFirst6;
-    public $cardLast4;
-    public $paymentPurchased;
-    public $status;
-    public $posResult;
-    public $error;
+    private $code;
+    private $call;
+    private $description;
+    private $message;
+    private $result;
+    private $parameters;
+    private $bkmTokenId;
+    private $totalAmount;
+    private $installmentCount;
+    private $cardFirst6;
+    private $cardLast4;
+    private $paymentPurchased;
+    private $status;
+    private $posResult;
+    private $cardHash;
+    private $error;
 
     /**
      * NonceResultResponse constructor.
-     *
      * @param $code
      * @param $call
      * @param $description
@@ -43,9 +46,10 @@ class NonceResultResponse
      * @param $paymentPurchased
      * @param $status
      * @param $posResult
+     * @param $cardHash
      * @param $error
      */
-    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult, $error)
+    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult, $cardHash,$error)
     {
         $this->code = $code;
         $this->call = $call;
@@ -60,11 +64,12 @@ class NonceResultResponse
         $this->cardLast4 = $cardLast4;
         $this->paymentPurchased = $paymentPurchased;
         $this->status = $status;
+        $this->cardHash = $cardHash;
         $this->posResult = new PosResult($posResult);
         $this->error = $error;
-
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -305,4 +310,22 @@ class NonceResultResponse
     {
         $this->error = $error;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCardHash()
+    {
+        return $this->cardHash;
+    }
+
+    /**
+     * @param mixed $cardHash
+     */
+    public function setCardHash($cardHash)
+    {
+        $this->cardHash = $cardHash;
+    }
+
+
 }

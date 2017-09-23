@@ -4,13 +4,12 @@ namespace Bex\merchant\token;
 
 class Token
 {
-    public $shortId;
-    public $path;
-    public $token;
+    private $shortId;
+    private $path;
+    private $token;
 
     /**
      * Token constructor.
-     *
      * @param $shortId
      * @param $path
      * @param $token
@@ -69,4 +68,9 @@ class Token
     {
         $this->token = $token;
     }
+
+
+    
+
+
 }
