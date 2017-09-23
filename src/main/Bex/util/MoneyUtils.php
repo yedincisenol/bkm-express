@@ -1,4 +1,5 @@
 <?php
+
 namespace Bex\util;
 
 use Bex\exceptions\MoneyUtilException;
@@ -15,14 +16,16 @@ class MoneyUtils
     private static function format($amount)
     {
         $formattedAmount = str_replace(',', '.', $amount);
-        $formattedAmount = sprintf("%01.2f", $formattedAmount);
+        $formattedAmount = sprintf('%01.2f', $formattedAmount);
         $formattedAmount = str_replace('.', ',', $formattedAmount);
+
         return $formattedAmount;
     }
 
     public static function toFloat($amount)
     {
         $formattedAmount = str_replace(',', '.', $amount);
+
         return $formattedAmount;
     }
 
@@ -34,16 +37,14 @@ class MoneyUtils
     //TODO refactor
     public static function enforceAmountFormat($amount)
     {
-        if (strpos($amount, ".")) {
-            throw new MoneyUtilException("Input validation error.");
+        if (strpos($amount, '.')) {
+            throw new MoneyUtilException('Input validation error.');
         }
-        $splitted = explode(",", $amount);
+        $splitted = explode(',', $amount);
         if (count($splitted) != 2 || strlen($splitted[1]) != 2) {
-            throw new MoneyUtilException("Input validation error.");
+            throw new MoneyUtilException('Input validation error.');
         }
 
         return $amount;
     }
-
-
 }

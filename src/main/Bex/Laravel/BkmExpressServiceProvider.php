@@ -21,7 +21,7 @@ class BkmExpressServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/bkmexpress.php' => config_path('bkmexpress.php')
+            __DIR__.'/config/bkmexpress.php' => config_path('bkmexpress.php'),
         ]);
     }
 
@@ -33,7 +33,7 @@ class BkmExpressServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/bkmexpress.php', 'bkmexpress'
+            __DIR__.'/config/bkmexpress.php', 'bkmexpress'
         );
 
         $this->app->singleton('bkmexpress', function ($app) {

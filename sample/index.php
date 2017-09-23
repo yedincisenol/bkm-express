@@ -5,8 +5,8 @@ use Bex\exceptions\BexException;
 use Bex\merchant\request\InstallmentRequest;
 use Bex\merchant\response\TicketRefresh;
 
-$params = new SampleSetup($data=null,"checkout");
-if(isset($params)){
+$params = new SampleSetup($data = null, 'checkout');
+if (isset($params)) {
     $success = $params->getSuccess();
     $ticketShortId = $params->getTicketId();
     $ticketPath = $params->getTicketPath();
@@ -16,60 +16,52 @@ if(isset($params)){
     $baseUrl = $params->getBaseUrl();
     $connectionId = $params->getConnectionId();
 }
-    if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        if (isset($_REQUEST['ticketId'])) {
+            $resultData = $params->callResult($_GET['ticketId']);
+            if ($resultData->getResult() == 'ok') {
+                $installmentCount = $resultData->getInstallmentCount();
+                $totalAmount = $resultData->getTotalAmount();
+                $cardData = $resultData->getCardFirst6().'******'.$resultData->getCardLast4();
+                $bkmTokenId = $resultData->getBkmTokenId();
+                $posResult = $resultData->getPosResult();
 
-            if(isset($_REQUEST['ticketId'])){
-                $resultData = $params->callResult($_GET['ticketId']);
-                   if($resultData->getResult() == 'ok'){
-                       $installmentCount = $resultData->getInstallmentCount();
-                       $totalAmount = $resultData->getTotalAmount();
-                       $cardData = $resultData->getCardFirst6()."******".$resultData->getCardLast4();
-                       $bkmTokenId = $resultData->getBkmTokenId();
-                       $posResult = $resultData->getPosResult();
-
-                       $orderId = $posResult->getOrderId();
-                       $authCode = $posResult->getAuthCode();
-                       $posResponse = $posResult->getPosResponse();
-                       $posResultCode = $posResult->getPosResultCode();
-                       $referenceNumber = $posResult->getReferenceNumber();
-                       $posTransactionId = $posResult->getPosTransactionId();
-                       $posBank = $posResult->getPosBank();
-                       exit(json_encode(array('installmentCount' => $installmentCount,'totalAmount' => $totalAmount , 'cardData' => $cardData , 'bkmTokenId' =>$bkmTokenId ,
-                           'posResult' => array('orderId' => $orderId,'authCode' =>$authCode , 'posResponse' =>$posResponse , 'posResultCode' => $posResultCode ,
-                               'referenceNumber' => $referenceNumber , 'posTransactionId' => $posTransactionId , 'posBank' =>$posBank) )));
-                   }
-               }
-
-               if(isset($_REQUEST['reinit'])){
-                 $ticketResponse = $params->callReInitTicket();
-                   $ticketRefresh = new TicketRefresh($ticketResponse->getTicketShortId(),$ticketResponse->getTicketPath(),$ticketResponse->getTicketToken());
-                   exit(json_encode(array("id"=>$ticketRefresh->getId(),"path" => $ticketRefresh->getPath(),"token" => $ticketRefresh->getToken()),JSON_PRETTY_PRINT));
-
-               }
-
-    }else{
-        if(isset($_REQUEST['installment'])) {
-            if($_REQUEST['installment'] == "checkout") {
-                header('Content-type: application/json');
-                $data =json_decode(file_get_contents('php://input'),TRUE);
-                if(!empty($data)){
-
-                    $installmentRequest = new InstallmentRequest($data["bin"],$data["totalAmount"],$data["ticketId"],$data["signature"]);
-                    $binAndInstallments =  $params->getInstallmentResponse($installmentRequest);
-                    if(isset($binAndInstallments)){
-                        exit(json_encode(array("data" => $binAndInstallments, 'status' => 'ok' , 'error' => '')));
-                    }else{
-                        exit(json_encode(array("data" => null, 'status' => 'fail' , 'error' => 'Can not get installments')));
-
-                    }
-                }else{
-                    throw  new BexException("Request body can not get !");
-                }
+                $orderId = $posResult->getOrderId();
+                $authCode = $posResult->getAuthCode();
+                $posResponse = $posResult->getPosResponse();
+                $posResultCode = $posResult->getPosResultCode();
+                $referenceNumber = $posResult->getReferenceNumber();
+                $posTransactionId = $posResult->getPosTransactionId();
+                $posBank = $posResult->getPosBank();
+                exit(json_encode(['installmentCount' => $installmentCount, 'totalAmount' => $totalAmount, 'cardData' => $cardData, 'bkmTokenId' =>$bkmTokenId,
+                           'posResult'                      => ['orderId' => $orderId, 'authCode' =>$authCode, 'posResponse' =>$posResponse, 'posResultCode' => $posResultCode,
+                               'referenceNumber'                          => $referenceNumber, 'posTransactionId' => $posTransactionId, 'posBank' =>$posBank, ], ]));
             }
-
-
         }
 
+        if (isset($_REQUEST['reinit'])) {
+            $ticketResponse = $params->callReInitTicket();
+            $ticketRefresh = new TicketRefresh($ticketResponse->getTicketShortId(), $ticketResponse->getTicketPath(), $ticketResponse->getTicketToken());
+            exit(json_encode(['id'=>$ticketRefresh->getId(), 'path' => $ticketRefresh->getPath(), 'token' => $ticketRefresh->getToken()], JSON_PRETTY_PRINT));
+        }
+    } else {
+        if (isset($_REQUEST['installment'])) {
+            if ($_REQUEST['installment'] == 'checkout') {
+                header('Content-type: application/json');
+                $data = json_decode(file_get_contents('php://input'), true);
+                if (!empty($data)) {
+                    $installmentRequest = new InstallmentRequest($data['bin'], $data['totalAmount'], $data['ticketId'], $data['signature']);
+                    $binAndInstallments = $params->getInstallmentResponse($installmentRequest);
+                    if (isset($binAndInstallments)) {
+                        exit(json_encode(['data' => $binAndInstallments, 'status' => 'ok', 'error' => '']));
+                    } else {
+                        exit(json_encode(['data' => null, 'status' => 'fail', 'error' => 'Can not get installments']));
+                    }
+                } else {
+                    throw  new BexException('Request body can not get !');
+                }
+            }
+        }
     }
 
 function stripslashes_deep($value)
@@ -1033,9 +1025,9 @@ Ekle
 
 <script type="text/javascript">
 
-    var ticketIdForInit = <?php echo "'".$ticketShortId."'" ;?>;
-    var ticketPathForInit = <?php echo "'".$ticketPath."'" ;?>;
-    var ticketTokenForInit = <?php echo "'".$ticketToken."'" ;?>;
+    var ticketIdForInit = <?php echo "'".$ticketShortId."'"; ?>;
+    var ticketPathForInit = <?php echo "'".$ticketPath."'"; ?>;
+    var ticketTokenForInit = <?php echo "'".$ticketToken."'"; ?>;
         Bex.init({"id":ticketIdForInit,"path":ticketPathForInit,"token":ticketTokenForInit}, "modal", {
             container: "payment-dropin",
             buttonSize: [135, 70],

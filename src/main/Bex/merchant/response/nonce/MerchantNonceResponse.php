@@ -1,4 +1,5 @@
 <?php
+
 namespace Bex\merchant\response\nonce;
 
 class MerchantNonceResponse
@@ -71,6 +72,4 @@ class MerchantNonceResponse
     {
         $this->id = $id;
     }
-
-
 }
