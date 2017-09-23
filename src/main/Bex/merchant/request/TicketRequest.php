@@ -7,7 +7,7 @@ class TicketRequest
     public $type;
     public $installmentUrl;
     public $nonceUrl;
-    public $amount ;
+    public $amount;
     public $orderId;
 
     /**
@@ -25,8 +25,6 @@ class TicketRequest
     {
         $this->type = $type;
     }
-
-
 
     /**
      * @return mixed
@@ -91,5 +89,4 @@ class TicketRequest
     {
         $this->orderId = $orderId;
     }
-
 }

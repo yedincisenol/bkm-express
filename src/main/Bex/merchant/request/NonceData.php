@@ -2,30 +2,29 @@
 
 namespace Bex\merchant\request;
 
-
 class NonceData
 {
-    public  $ticketId;
-    public  $orderId;
-    public  $totalAmount;
-    public  $totalAmountWithInstallmentCharge;
-    public  $numberOfInstallments;
-
+    public $ticketId;
+    public $orderId;
+    public $totalAmount;
+    public $totalAmountWithInstallmentCharge;
+    public $numberOfInstallments;
 
     /**
      * NonceData constructor.
+     *
      * @param $reply
      */
     public function __construct($reply)
     {
         $this->ticketId = $reply['ticketId'];
-        $this->orderId =  $reply['orderId'];
-        $this->totalAmount =  $reply['totalAmount'];
-        $this->totalAmountWithInstallmentCharge =  $reply['totalAmountWithInstallmentCharge'];
-        $this->numberOfInstallments =  $reply['numberOfInstallments'];
+        $this->orderId = $reply['orderId'];
+        $this->totalAmount = $reply['totalAmount'];
+        $this->totalAmountWithInstallmentCharge = $reply['totalAmountWithInstallmentCharge'];
+        $this->numberOfInstallments = $reply['numberOfInstallments'];
+
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -106,7 +105,4 @@ class NonceData
     {
         $this->numberOfInstallments = $numberOfInstallments;
     }
-
-
-
 }

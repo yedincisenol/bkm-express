@@ -3,27 +3,26 @@
 namespace Bex\Laravel;
 
 use Bex\config\BexPayment;
-use Bex\merchant\service\MerchantService;
 use Bex\merchant\request\InstallmentRequest;
-use Bex\merchant\response\InstallmentsResponse;
-use Bex\exceptions\EncryptionException\EncryptionException;
-use Bex\merchant\request\VposConfig;
-use Bex\merchant\security\EncryptionUtil;
 use Bex\merchant\request\NonceRequest;
+use Bex\merchant\request\VposConfig;
+use Bex\merchant\response\InstallmentsResponse;
 use Bex\merchant\response\nonce\MerchantNonceResponse;
-use Log;
+use Bex\merchant\security\EncryptionUtil;
+use Bex\merchant\service\MerchantService;
 
 class Bkm
 {
-
     /**
-     * Config variables
+     * Config variables.
+     *
      * @var
      */
     private $config;
 
     /**
-     * Ticket object
+     * Ticket object.
+     *
      * @var
      */
     private $ticket;
@@ -35,6 +34,7 @@ class Bkm
 
     /**
      * Bkm constructor.
+     *
      * @param $config
      */
     public function __construct($config)
@@ -43,7 +43,8 @@ class Bkm
     }
 
     /**
-     * Init BKM express config;
+     * Init BKM express config;.
+     *
      * @return mixed
      */
     public function config()
@@ -56,26 +57,29 @@ class Bkm
     }
 
     /**
-     * Get connection tkoen
+     * Get connection tkoen.
+     *
      * @param $config
+     *
      * @return mixed
      */
     private function merchantService($config)
     {
-        return (new MerchantService($config));
+        return new MerchantService($config);
     }
 
     /**
      * @param $amount
+     *
      * @return mixed
      */
     public function init($amount)
     {
         //BKM Config
-        $this->bkmConfig= $this->config();
-        $merchantService= $this->merchantService($this->bkmConfig);
-        $connectionToken= $merchantService->login()->getToken();
-        $this->ticket   = $merchantService->oneTimeTicketWithoutInstallmentUrlWithNonce(
+        $this->bkmConfig = $this->config();
+        $merchantService = $this->merchantService($this->bkmConfig);
+        $connectionToken = $merchantService->login()->getToken();
+        $this->ticket = $merchantService->oneTimeTicketWithoutInstallmentUrlWithNonce(
             $connectionToken, $amount, url(config('bkmexpress.nonce_path'))
         );
 
@@ -83,15 +87,17 @@ class Bkm
     }
 
     /**
-     * Check payment status
+     * Check payment status.
+     *
      * @param $ticketID
+     *
      * @return bool
      */
     public function check($ticketID)
     {
-        $merchantService    =   $this->merchantService($this->config());
-        $merchantResponse   =   $merchantService->login();
-        $paymentStatus      =   $merchantService->result(
+        $merchantService = $this->merchantService($this->config());
+        $merchantResponse = $merchantService->login();
+        $paymentStatus = $merchantService->result(
             $merchantResponse->getConnectionToken(),
             $merchantResponse->getPath(),
             $ticketID
@@ -100,7 +106,6 @@ class Bkm
         if ($paymentStatus->status == 'ok' &&
             $paymentStatus->posResult->orderId &&
             $paymentStatus->paymentPurchased == 1) {
-
             return true;
         }
 
@@ -108,7 +113,8 @@ class Bkm
     }
 
     /**
-     * Return active ticket
+     * Return active ticket.
+     *
      * @return mixed
      */
     public function getTicket()
@@ -117,7 +123,8 @@ class Bkm
     }
 
     /**
-     * Return bkm config object
+     * Return bkm config object.
+     *
      * @return mixed
      */
     public function getConfig()
@@ -126,8 +133,10 @@ class Bkm
     }
 
     /**
-     * Get installments
+     * Get installments.
+     *
      * @param InstallmentRequest $installmentRequest
+     *
      * @return array|\Bex\merchant\response\Installment
      */
     private function installment(InstallmentRequest $installmentRequest)
@@ -143,9 +152,9 @@ class Bkm
 
         $installment = [
             'numberOfInstallment' => $installment->getNumberOfInstallment(),
-            'installmentAmount' => $installment->getInstallmentAmount() ,
-            'totalAmount' => $installment->getTotalAmount() ,
-            'vposConfig' => $installment->getVposConfig()
+            'installmentAmount'   => $installment->getInstallmentAmount(),
+            'totalAmount'         => $installment->getTotalAmount(),
+            'vposConfig'          => $installment->getVposConfig(),
         ];
 
         return $installment;
@@ -153,6 +162,7 @@ class Bkm
 
     /**
      * @param $request
+     *
      * @return bool
      */
     public function security($request)
@@ -161,46 +171,45 @@ class Bkm
     }
 
     /**
-     * Pos information
+     * Pos information.
+     *
      * @param $bins
      * @param $totalAmount
      * @param $ticketId
      * @param $signature
+     *
      * @return \Bex\merchant\response\BinAndInstallments
      */
     public function pos($bins, $totalAmount, $ticketId, $signature)
     {
-
         $installmentRequest = new InstallmentRequest(
-            $bins,  $totalAmount, $ticketId, $signature
+            $bins, $totalAmount, $ticketId, $signature
         );
 
         $binAndBank = $installmentRequest->getBinNo()[0];
 
         $this->security($installmentRequest);
 
-        foreach ($bins as $bin)
-        {
-
+        foreach ($bins as $bin) {
             list($binCode, $bankBin) = explode('@', $binAndBank);
             $installments = $this->installment($installmentRequest);
-            $binAndInstallments     = new \Bex\merchant\response\BinAndInstallments();
-            $installmentResponse    = new InstallmentsResponse();
+            $binAndInstallments = new \Bex\merchant\response\BinAndInstallments();
+            $installmentResponse = new InstallmentsResponse();
             $installmentResponse->setInstallments($installments);
-            $installmentResponse->setStatus("ok");
+            $installmentResponse->setStatus('ok');
             $installmentResponse->setBin($binCode);
-            $installment = array();
+            $installment = [];
 
             $installment[$installmentResponse->getBin()] = $installmentResponse->getInstallments();
             $binAndInstallments->setInstallments($installment);
         }
 
         return $binAndInstallments;
-
     }
 
     /**
-     * Retrievs post config
+     * Retrievs post config.
+     *
      * @return VposConfig
      */
     private function posConfig()
@@ -217,7 +226,8 @@ class Bkm
     }
 
     /**
-     * Nonce request object
+     * Nonce request object.
+     *
      * @param $id
      * @param $path
      * @param $issuer
@@ -225,6 +235,7 @@ class Bkm
      * @param $token
      * @param $signature
      * @param $reply
+     *
      * @return NonceRequest
      */
     public function nonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply)
@@ -234,15 +245,16 @@ class Bkm
 
     /**
      * @param NonceRequest $request
-     * @param string $message
-     * @param bool $result
+     * @param string       $message
+     * @param bool         $result
+     *
      * @return MerchantNonceResponse
      */
     public function sendNonceResponse(NonceRequest $request, $message = '', $result = false)
     {
-        $merchantService    =   $this->merchantService($this->config());
-        $merchantResponse   =   $merchantService->login();
-        $nonceResponse      =   new MerchantNonceResponse();
+        $merchantService = $this->merchantService($this->config());
+        $merchantResponse = $merchantService->login();
+        $nonceResponse = new MerchantNonceResponse();
 
         $nonceResponse->setResult($result);
         $nonceResponse->setNonce($request->getToken());
