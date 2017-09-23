@@ -23,7 +23,8 @@ class BexApiConfiguration
 
     /**
      * BexApiConfiguration constructor.
-     * @param  mixed $environment
+     * @param $environment
+     * @throws BexApiConfigurationException
      */
     public function __construct($environment)
     {

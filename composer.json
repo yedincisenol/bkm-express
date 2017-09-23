@@ -1,10 +1,13 @@
 {
-    "name": "enesdayanc/bkm-exp-bex2-sdk-php",
+    "name": "yedincisenol/bkm-express",
     "type": "library",
     "description": "Bex PHP Client Library",
     "authors": [
         {
             "name": "Bex Developer Team"
+        },
+        {
+            "name": "İbrahim Ş. Örencik"
         }
     ],
     "require": {
