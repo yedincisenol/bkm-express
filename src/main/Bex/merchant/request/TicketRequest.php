@@ -34,7 +34,6 @@ class TicketRequest
         $this->type = $type;
     }
 
-
     /**
      * @return mixed
      */
@@ -116,20 +115,18 @@ class TicketRequest
             return $this;
         }
 
-        if (strlen($tckn["no"]) != 11) {
-            throw new BexException("TCKN Must be 11 numbers long");
+        if (strlen($tckn['no']) != 11) {
+            throw new BexException('TCKN Must be 11 numbers long');
         } else {
-            $encryptedTcknNo = EncryptionUtil::encryptBex($tckn["no"]);
-            $tcknCheck = $tckn["check"];
+            $encryptedTcknNo = EncryptionUtil::encryptBex($tckn['no']);
+            $tcknCheck = $tckn['check'];
             if ($tcknCheck == null) {
                 $tcknCheck = false;
             }
-            $tcknResult["check"] = $tcknCheck;
-            $tcknResult["no"] = $encryptedTcknNo;
+            $tcknResult['check'] = $tcknCheck;
+            $tcknResult['no'] = $encryptedTcknNo;
             $this->tckn = $tcknResult;
-
         }
-
     }
 
     /**
@@ -148,18 +145,17 @@ class TicketRequest
         if ($msisdn == null) {
             return $this;
         }
-        if (strlen($msisdn["no"]) != 10) {
-            throw new BexException("MSISDN must be 10 numbers without a leading zero.");
+        if (strlen($msisdn['no']) != 10) {
+            throw new BexException('MSISDN must be 10 numbers without a leading zero.');
         } else {
-            $encryptedMsisdnNo = EncryptionUtil::encryptBex($msisdn["no"]);
-            $msisdnCheck = $msisdn["check"];
+            $encryptedMsisdnNo = EncryptionUtil::encryptBex($msisdn['no']);
+            $msisdnCheck = $msisdn['check'];
             if ($msisdnCheck == null) {
                 $msisdnCheck = false;
             }
-            $msisdnResult["check"] = $msisdnCheck;
-            $msisdnResult["no"] = $encryptedMsisdnNo;
+            $msisdnResult['check'] = $msisdnCheck;
+            $msisdnResult['no'] = $encryptedMsisdnNo;
             $this->msisdn = $msisdnResult;
-
         }
     }
 
@@ -201,5 +197,4 @@ class TicketRequest
         }
         $this->address = $address;
     }
-
 }

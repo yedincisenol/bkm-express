@@ -2,7 +2,6 @@
 
 namespace Bex\merchant\request;
 
-
 use Bex\merchant\request\address\Address;
 
 class NonceData
@@ -17,6 +16,7 @@ class NonceData
 
     /**
      * NonceData constructor.
+     *
      * @param $reply
      */
     public function __construct($reply)
@@ -28,9 +28,9 @@ class NonceData
         $this->numberOfInstallments = $reply['numberOfInstallments'];
         $this->deliveryAddress = new Address(@$reply['deliveryAddress']);
         $this->billingAddress = new Address(@$reply['billingAddress']);
+
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -143,5 +143,4 @@ class NonceData
     {
         $this->billingAddress = $billingAddress;
     }
-
 }

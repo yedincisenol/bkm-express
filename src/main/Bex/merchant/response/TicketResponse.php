@@ -1,7 +1,6 @@
 <?php
-namespace Bex\merchant\response;
 
-use Bex\merchant\token\Token;
+namespace Bex\merchant\response;
 
 class TicketResponse
 {
@@ -17,6 +16,7 @@ class TicketResponse
 
     /**
      * TicketResponse constructor.
+     *
      * @param $code
      * @param $call
      * @param $description
@@ -39,7 +39,6 @@ class TicketResponse
         $this->ticketPath = $ticketPath;
         $this->ticketToken = $ticketToken;
     }
-
 
     /**
      * @return mixed
@@ -184,6 +183,4 @@ class TicketResponse
     {
         $this->ticketToken = $ticketToken;
     }
-
-
 }

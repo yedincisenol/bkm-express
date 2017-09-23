@@ -3,13 +3,10 @@
  * Created by IntelliJ IDEA.
  * User: mrpehlivan
  * Date: 19/01/2017
- * Time: 15:55
+ * Time: 15:55.
  */
 
 namespace Bex\merchant\response\nonce;
-
-
-use Bex\merchant\response\PaymentResultResponse;
 
 class NonceResultResponse
 {
@@ -32,6 +29,7 @@ class NonceResultResponse
 
     /**
      * NonceResultResponse constructor.
+     *
      * @param $code
      * @param $call
      * @param $description
@@ -49,7 +47,7 @@ class NonceResultResponse
      * @param $cardHash
      * @param $error
      */
-    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult, $cardHash,$error)
+    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult, $cardHash, $error)
     {
         $this->code = $code;
         $this->call = $call;
@@ -67,9 +65,9 @@ class NonceResultResponse
         $this->cardHash = $cardHash;
         $this->posResult = new PosResult($posResult);
         $this->error = $error;
+
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -326,6 +324,4 @@ class NonceResultResponse
     {
         $this->cardHash = $cardHash;
     }
-
-
 }

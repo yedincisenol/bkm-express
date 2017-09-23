@@ -1,11 +1,8 @@
 <?php
 
-
 namespace Bex\merchant\response;
 
-
 use Bex\merchant\response\nonce\PosResult;
-use Bex\merchant\response\nonce\TicketResult;
 
 class PaymentResultResponse
 {
@@ -27,6 +24,7 @@ class PaymentResultResponse
 
     /**
      * PaymentResultResponse constructor.
+     *
      * @param $code
      * @param $call
      * @param $description
@@ -43,7 +41,7 @@ class PaymentResultResponse
      * @param $posResult
      * @param $cardHash
      */
-    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult,$cardHash)
+    public function __construct($code, $call, $description, $message, $result, $parameters, $bkmTokenId, $totalAmount, $installmentCount, $cardFirst6, $cardLast4, $paymentPurchased, $status, $posResult, $cardHash)
     {
         $this->code = $code;
         $this->call = $call;
@@ -60,9 +58,9 @@ class PaymentResultResponse
         $this->status = $status;
         $this->cardHash = $cardHash;
         $this->posResult = new PosResult($posResult);
+
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -303,6 +301,4 @@ class PaymentResultResponse
     {
         $this->cardHash = $cardHash;
     }
-
-
 }

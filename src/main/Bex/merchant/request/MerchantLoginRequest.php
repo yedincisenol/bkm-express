@@ -1,4 +1,5 @@
 <?php
+
 namespace Bex\merchant\request;
 
 class MerchantLoginRequest
@@ -8,6 +9,7 @@ class MerchantLoginRequest
 
     /**
      * MerchantLoginRequest constructor.
+     *
      * @param $name
      * @param $password
      */
@@ -16,7 +18,6 @@ class MerchantLoginRequest
         $this->name = $name;
         $this->password = $password;
     }
-
 
     /**
      * @return mixed
@@ -49,5 +50,4 @@ class MerchantLoginRequest
     {
         $this->password = $password;
     }
-
 }
