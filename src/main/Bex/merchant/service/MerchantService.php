@@ -8,7 +8,6 @@ use Bex\merchant\request\MerchantLoginRequest;
 use Bex\merchant\request\TicketRequest;
 use Bex\merchant\response\MerchantLoginResponse;
 use Bex\merchant\response\nonce\MerchantNonceResponse;
-use Bex\merchant\response\nonce\NonceReceivedResponse;
 use Bex\merchant\response\nonce\NonceResultResponse;
 use Bex\merchant\response\PaymentResultResponse;
 use Bex\merchant\response\TicketResponse;
