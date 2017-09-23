@@ -8,7 +8,6 @@ class Builder extends TicketRequest
 {
     private $ticketRequest;
 
-
     public function __construct($type)
     {
         parent::setType($type);
@@ -16,7 +15,7 @@ class Builder extends TicketRequest
 
     public static function newPayment($type)
     {
-        return new Builder($type);
+        return new self($type);
     }
 
     public function amountAndInstallmentUrl(Builder $builder)
@@ -35,8 +34,8 @@ class Builder extends TicketRequest
         }
         $this->agreementUrl($builder->getAgreementUrl());
         $this->address($builder->getAddress());
-        return $this;
 
+        return $this;
     }
 
     public function amount($amount)
@@ -45,6 +44,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setAmount($amount);
+
         return $this;
     }
 
@@ -54,6 +54,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setInstallmentUrl($installmentUrl);
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setNonceUrl($nonceUrl);
+
         return $this;
     }
 
@@ -72,6 +74,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setCampaignCode($campaignCode);
+
         return $this;
     }
 
@@ -81,6 +84,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setOrderId($orderId);
+
         return $this;
     }
 
@@ -89,7 +93,8 @@ class Builder extends TicketRequest
         if ($number == null) {
             return $this;
         }
-        parent::setTckn(array('no' => $number, 'check' => $check));
+        parent::setTckn(['no' => $number, 'check' => $check]);
+
         return $this;
     }
 
@@ -98,10 +103,11 @@ class Builder extends TicketRequest
         if ($phoneNumber == null) {
             return $this;
         }
-        parent::setMsisdn(array(
-            'no' => $phoneNumber,
-            'check' => $check
-        ));
+        parent::setMsisdn([
+            'no'    => $phoneNumber,
+            'check' => $check,
+        ]);
+
         return $this;
     }
 
@@ -111,6 +117,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setAgreementUrl($agreementUrl);
+
         return $this;
     }
 
@@ -120,6 +127,7 @@ class Builder extends TicketRequest
             return $this;
         }
         parent::setAddress($address);
+
         return $this;
     }
 

@@ -17,24 +17,23 @@ class Address
     private $tckn;
     private $email;
 
-
     public function __construct($address)
     {
         if ($address == null) {
             return $this;
         }
-        $this->addressType = $address["addressType"];
-        $this->name = $address["name"];
-        $this->surname = $address["surname"];
-        $this->companyName = $address["companyName"];
-        $this->address = $address["address"];
-        $this->telephone = $address["telephone"];
-        $this->taxNumber = $address["taxNumber"];
-        $this->taxOffice = $address["taxOffice"];
-        $this->county = $address["county"];
-        $this->city = $address["city"];
-        $this->tckn = $address["tckn"];
-        $this->email = $address["email"];
+        $this->addressType = $address['addressType'];
+        $this->name = $address['name'];
+        $this->surname = $address['surname'];
+        $this->companyName = $address['companyName'];
+        $this->address = $address['address'];
+        $this->telephone = $address['telephone'];
+        $this->taxNumber = $address['taxNumber'];
+        $this->taxOffice = $address['taxOffice'];
+        $this->county = $address['county'];
+        $this->city = $address['city'];
+        $this->tckn = $address['tckn'];
+        $this->email = $address['email'];
     }
 
     /**
@@ -229,5 +228,3 @@ class Address
         $this->email = $email;
     }
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 namespace Bex\merchant\request;
 
 class InstallmentRequest
@@ -10,6 +11,7 @@ class InstallmentRequest
 
     /**
      * InstallmentRequest constructor.
+     *
      * @param $binNo
      * @param $totalAmount
      * @param $ticketId
@@ -22,7 +24,6 @@ class InstallmentRequest
         $this->ticketId = $ticketId;
         $this->signature = $signature;
     }
-
 
     /**
      * @return mixed
@@ -87,6 +88,4 @@ class InstallmentRequest
     {
         $this->signature = $signature;
     }
-
-
 }

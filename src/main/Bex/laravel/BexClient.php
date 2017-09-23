@@ -73,9 +73,10 @@ class BexClient
      * @param $aggreementUrl
      * @param null $installmentUrl
      * @param bool $addressEnabled
+     *
      * @return $this
      */
-    public function init($amount, $nonceUrl, $aggreementUrl ,$installmentUrl = null, $addressEnabled = false)
+    public function init($amount, $nonceUrl, $aggreementUrl, $installmentUrl = null, $addressEnabled = false)
     {
 
         //BKM Config
@@ -251,7 +252,7 @@ class BexClient
      */
     public function nonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply, $hash, $tcknMath, $msisdnMatch)
     {
-        return new NonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply,  $hash, $tcknMath, $msisdnMatch);
+        return new NonceRequest($id, $path, $issuer, $approver, $token, $signature, $reply, $hash, $tcknMath, $msisdnMatch);
     }
 
     /**

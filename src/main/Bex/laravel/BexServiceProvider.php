@@ -21,7 +21,7 @@ class BexServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/bex.php' => config_path('bex.php'),
+            __DIR__.'/config/bex.php' => config_path('bex.php'),
         ], 'config');
     }
 
@@ -33,7 +33,7 @@ class BexServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/bex.php', 'bex'
+            __DIR__.'/config/bex.php', 'bex'
         );
 
         $this->app->singleton('bex', function ($app) {

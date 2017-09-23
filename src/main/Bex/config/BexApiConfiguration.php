@@ -7,48 +7,47 @@ use Bex\exceptions\BexApiConfigurationException;
 
 class BexApiConfiguration
 {
-    const  LOCAL_URL = "http://api.bex.dev/v1/";
-    const  DEV_URL = "https://bex-api.finartz.com/v1/";
-    const  SANDBOX_URL = "https://test-api.bkmexpress.com.tr/v1/";
-    const  PREPROD_URL = "https://preprod-api.bkmexpress.com.tr/v1/";
-    const PRODUCTION_URL = "https://api.bkmexpress.com.tr/v1/";
+    const  LOCAL_URL = 'http://api.bex.dev/v1/';
+    const  DEV_URL = 'https://bex-api.finartz.com/v1/';
+    const  SANDBOX_URL = 'https://test-api.bkmexpress.com.tr/v1/';
+    const  PREPROD_URL = 'https://preprod-api.bkmexpress.com.tr/v1/';
+    const PRODUCTION_URL = 'https://api.bkmexpress.com.tr/v1/';
 
-    const LOCAL_EXPRESS_JS_URL = "http://js.bex.dev/javascripts/bex.js";
-    const DEV_EXPRESS_JS_URL = "https://bex-js.finartz.com/v1/javascripts/bex.js";
-    const SANDBOX_EXPRESS_JS_URL = "https://test-js.bkmexpress.com.tr/v1/javascripts/bex.js";
-    const PREPROD_EXPRESS_JS_URL = "https://preprod-js.bkmexpress.com.tr/v1/javascripts/bex.js";
-    const PRODUCTION_EXPRESS_JS_URL = "https://js.bkmexpress.com.tr/v1/javascripts/bex.js";
+    const LOCAL_EXPRESS_JS_URL = 'http://js.bex.dev/javascripts/bex.js';
+    const DEV_EXPRESS_JS_URL = 'https://bex-js.finartz.com/v1/javascripts/bex.js';
+    const SANDBOX_EXPRESS_JS_URL = 'https://test-js.bkmexpress.com.tr/v1/javascripts/bex.js';
+    const PREPROD_EXPRESS_JS_URL = 'https://preprod-js.bkmexpress.com.tr/v1/javascripts/bex.js';
+    const PRODUCTION_EXPRESS_JS_URL = 'https://js.bkmexpress.com.tr/v1/javascripts/bex.js';
 
     private $baseUrl;
     private $baseJs;
 
-
     /**
      * BexApiConfiguration constructor.
-     * @param  mixed $environment
+     *
+     * @param mixed $environment
      */
     public function __construct($environment)
     {
         if (Environment::LOCAL == $environment) {
-            $this->baseUrl = BexApiConfiguration::LOCAL_URL;
-            $this->baseJs = BexApiConfiguration::LOCAL_EXPRESS_JS_URL;
-        } else if (Environment::DEV == $environment) {
-            $this->baseUrl = BexApiConfiguration::DEV_URL;
-            $this->baseJs = BexApiConfiguration::DEV_EXPRESS_JS_URL;
-        } else if (Environment::SANDBOX == $environment) {
-            $this->baseUrl = BexApiConfiguration::SANDBOX_URL;
-            $this->baseJs = BexApiConfiguration::SANDBOX_EXPRESS_JS_URL;
-        } else if (Environment::PREPROD == $environment) {
-            $this->baseUrl = BexApiConfiguration::PREPROD_URL;
-            $this->baseJs = BexApiConfiguration::PREPROD_EXPRESS_JS_URL;
-        } else if (Environment::PRODUCTION == $environment) {
-            $this->baseUrl = BexApiConfiguration::PRODUCTION_URL;
-            $this->baseJs = BexApiConfiguration::PRODUCTION_EXPRESS_JS_URL;
+            $this->baseUrl = self::LOCAL_URL;
+            $this->baseJs = self::LOCAL_EXPRESS_JS_URL;
+        } elseif (Environment::DEV == $environment) {
+            $this->baseUrl = self::DEV_URL;
+            $this->baseJs = self::DEV_EXPRESS_JS_URL;
+        } elseif (Environment::SANDBOX == $environment) {
+            $this->baseUrl = self::SANDBOX_URL;
+            $this->baseJs = self::SANDBOX_EXPRESS_JS_URL;
+        } elseif (Environment::PREPROD == $environment) {
+            $this->baseUrl = self::PREPROD_URL;
+            $this->baseJs = self::PREPROD_EXPRESS_JS_URL;
+        } elseif (Environment::PRODUCTION == $environment) {
+            $this->baseUrl = self::PRODUCTION_URL;
+            $this->baseJs = self::PRODUCTION_EXPRESS_JS_URL;
         } else {
-            throw new BexApiConfigurationException("You should set a valid environment");
+            throw new BexApiConfigurationException('You should set a valid environment');
         }
     }
-
 
     /**
      * @return mixed
@@ -81,6 +80,4 @@ class BexApiConfiguration
     {
         $this->baseJs = $baseJs;
     }
-
-
 }
