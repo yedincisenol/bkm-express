@@ -1,4 +1,5 @@
 <?php
+
 namespace Bex\merchant\response;
 
 class InstallmentsResponse
@@ -7,6 +8,7 @@ class InstallmentsResponse
     public $installments;
     public $status;
     public $error;
+
     /**
      * @return mixed
      */
@@ -70,8 +72,4 @@ class InstallmentsResponse
     {
         $this->bin = $bin;
     }
-
-
-
-
 }

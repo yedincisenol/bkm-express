@@ -2,16 +2,14 @@
 
 namespace test\BexTest\merchant\service;
 
-require_once dirname(dirname(__DIR__)) . '/Setup.php';
+require_once dirname(dirname(__DIR__)).'/Setup.php';
 
 use Bex\merchant\service\MerchantService;
 use BexTest\Setup;
 
-
 class MerchantServiceTest extends Setup
 {
-    const INSTALLMENT_URL = "https://bex-demo.finartz.com/merchant/installments";
-
+    const INSTALLMENT_URL = 'https://bex-demo.finartz.com/merchant/installments';
 
     public function testLoginWithParameters()
     {
@@ -19,8 +17,7 @@ class MerchantServiceTest extends Setup
         $merchantService = new MerchantService($config);
         $merchantService->login();
 
-        self::assertEquals("ok", $merchantService->login()->getResult());
-
+        self::assertEquals('ok', $merchantService->login()->getResult());
     }
 
     public function testCreateOneTimeTicket()
@@ -28,10 +25,9 @@ class MerchantServiceTest extends Setup
         $config = Setup::integrationMerchantConfig();
         $merchantService = new MerchantService($config);
         $merchantResponse = $merchantService->login();
-        $merchantService->oneTimeTicket($merchantResponse->getToken(), "1000,52", self::INSTALLMENT_URL);
-        var_dump($merchantService->oneTimeTicket($merchantResponse->getToken(), "1000,52", self::INSTALLMENT_URL));
-        self::assertEquals("ok", $merchantService->oneTimeTicket($merchantResponse->getToken(), "1000,52", self::INSTALLMENT_URL)->getResult());
-
+        $merchantService->oneTimeTicket($merchantResponse->getToken(), '1000,52', self::INSTALLMENT_URL);
+        var_dump($merchantService->oneTimeTicket($merchantResponse->getToken(), '1000,52', self::INSTALLMENT_URL));
+        self::assertEquals('ok', $merchantService->oneTimeTicket($merchantResponse->getToken(), '1000,52', self::INSTALLMENT_URL)->getResult());
     }
 
     /*
@@ -50,6 +46,4 @@ class MerchantServiceTest extends Setup
         self::assertEquals("ok", $resultResponse->getStatus());
 
     }*/
-
-
 }

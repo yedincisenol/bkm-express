@@ -4,7 +4,6 @@ namespace Bex\merchant\request;
 
 class NonceRequest
 {
-
     public $id;
     public $path;
     public $issuer;
@@ -13,9 +12,9 @@ class NonceRequest
     public $signature;
     public $reply;
 
-
     /**
      * NonceRequest constructor.
+     *
      * @param $id
      * @param $path
      * @param $issuer
@@ -38,7 +37,6 @@ class NonceRequest
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -55,7 +53,6 @@ class NonceRequest
         return $this->reply->getOrderId();
     }
 
-
     /**
      * @return mixed
      */
@@ -63,7 +60,6 @@ class NonceRequest
     {
         return $this->reply->getTotalAmount();
     }
-
 
     /**
      * @return mixed
@@ -80,7 +76,6 @@ class NonceRequest
     {
         return $this->reply->getTotalAmountWithInstallmentCharge();
     }
-
 
     /**
      * @return mixed
@@ -193,8 +188,4 @@ class NonceRequest
     {
         $this->reply = $reply;
     }
-
-
-
-
 }

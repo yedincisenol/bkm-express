@@ -1,12 +1,12 @@
 <?php
+
 namespace Bex\merchant\request;
 
 class VposConfig
 {
-
     public $vposUserId;
     public $vposPassword;
-    public $extra = array();
+    public $extra = [];
     public $bankIndicator;
     public $serviceUrl;
 
@@ -17,20 +17,23 @@ class VposConfig
     {
     }
 
-    public function addSubMerchantForFinans($subMerchantName,$subMerchantId,$subMerchantPostalCode,$subMerchantCity,$subMerchantCountry){
-        $this->addExtra("subMerchantName",$subMerchantName);
-        $this->addExtra("subMerchantId",$subMerchantId);
-        $this->addExtra("subMerchantPostalCode",$subMerchantPostalCode);
-        $this->addExtra("subMerchantCity",$subMerchantCity);
-        $this->addExtra("subMerchantCountry",$subMerchantCountry);
+    public function addSubMerchantForFinans($subMerchantName, $subMerchantId, $subMerchantPostalCode, $subMerchantCity, $subMerchantCountry)
+    {
+        $this->addExtra('subMerchantName', $subMerchantName);
+        $this->addExtra('subMerchantId', $subMerchantId);
+        $this->addExtra('subMerchantPostalCode', $subMerchantPostalCode);
+        $this->addExtra('subMerchantCity', $subMerchantCity);
+        $this->addExtra('subMerchantCountry', $subMerchantCountry);
+
         return $this;
     }
 
-    public function addSubMerchant($subMerchantName){
-        $this->addExtra("subMerchantName",$subMerchantName);
+    public function addSubMerchant($subMerchantName)
+    {
+        $this->addExtra('subMerchantName', $subMerchantName);
+
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -80,7 +83,6 @@ class VposConfig
         $this->extra = $extra;
     }
 
-
     /**
      * @return mixed
      */
@@ -113,11 +115,8 @@ class VposConfig
         $this->serviceUrl = $serviceUrl;
     }
 
-
     public function addExtra($key, $value)
     {
         $this->extra[$key] = $value;
     }
-
-
 }

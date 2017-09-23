@@ -10,6 +10,7 @@ class Token
 
     /**
      * Token constructor.
+     *
      * @param $shortId
      * @param $path
      * @param $token
@@ -68,9 +69,4 @@ class Token
     {
         $this->token = $token;
     }
-
-
-    
-
-
 }

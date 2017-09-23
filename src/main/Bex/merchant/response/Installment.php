@@ -1,9 +1,9 @@
 <?php
+
 namespace Bex\merchant\response;
 
 class Installment
 {
-
     public $numberOfInstallment;
     public $installmentAmount;
     public $totalAmount;
@@ -17,9 +17,9 @@ class Installment
 
     public $vposConfig;
 
-
     /**
      * Installment constructor.
+     *
      * @param $numberOfInstallment
      * @param $installmentAmount
      * @param $label
@@ -34,7 +34,6 @@ class Installment
         $this->totalAmount = $totalAmount;
         $this->vposConfig = $vposConfig;
     }
-
 
     /**
      * @return mixed
@@ -99,8 +98,6 @@ class Installment
     {
         $this->label = $label;
     }
-
-
 
     /**
      * @return mixed
@@ -197,6 +194,4 @@ class Installment
     {
         $this->subMerchantCountry = $subMerchantCountry;
     }
-
-
 }

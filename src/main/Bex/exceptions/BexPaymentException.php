@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Bex\exceptions;
 
 use Exception;
