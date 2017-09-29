@@ -155,7 +155,7 @@ class MerchantService
         $jsonArray = [
             'amount'   => $amount,
             'nonceUrl' => $nonceUrl,
-            'address'  => $address,
+            'address'  => (boolean) $address,
         ];
 
         if (isset($installmentUrl) && strlen($installmentUrl) > 0) {
