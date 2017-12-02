@@ -4,10 +4,10 @@
     "description": "Bex PHP Client Library",
     "authors": [
         {
-            "name": "Bex Developer Team"
+            "name": "İbrahim Ş. Örencik"
         },
         {
-            "name": "İbrahim Ş. Örencik"
+            "name": "Bex Developer Team"
         }
     ],
     "require": {
@@ -25,10 +25,6 @@
             "Bex\\": "src/main/OldBex"
         }
     },
-    "autoload-dev": {
-        "psr-0": {
-            "BexTest": "src/test/"
-        }
-    },
+    "version": "1.0.1",
     "license": "MIT"
 }
