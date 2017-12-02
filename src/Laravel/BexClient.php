@@ -76,7 +76,7 @@ class BexClient
      *
      * @return $this
      */
-    public function init($amount, $nonceUrl, $aggreementUrl, $installmentUrl = null, $addressEnabled = false)
+    public function init($amount, $nonceUrl, $aggreementUrl, $installmentUrl = 1, $addressEnabled = false)
     {
 
         //BKM Config

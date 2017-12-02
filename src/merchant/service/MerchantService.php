@@ -122,7 +122,6 @@ class MerchantService
     public function createOneTimeTicket($requestBody, Token $token)
     {
         $requestBody = $this->encodeTicketRequestObjectToJson($requestBody);
-
         try {
             $client = new Client();
             $res = $client->request('POST', $this->getMerchantCreateTicketUrl($token->getPath()), $this->postRequestOptionsWithToken($requestBody, $token->getToken()));
@@ -158,9 +157,9 @@ class MerchantService
             'address'  => (boolean) $address,
         ];
 
-        if (isset($installmentUrl) && strlen($installmentUrl) > 0) {
+        //if (isset($installmentUrl) && strlen($installmentUrl) > 0) {
             $jsonArray['installmentUrl'] = $installmentUrl;
-        }
+        //}
         if (isset($orderId) && strlen($orderId) > 0) {
             $jsonArray['orderId'] = $orderId;
         }
