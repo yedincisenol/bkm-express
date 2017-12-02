@@ -18,7 +18,7 @@ class Builder extends TicketRequest
         return new self($type);
     }
 
-    public function amountAndInstallmentUrl(Builder $builder)
+    public function amountAndInstallmentUrl(self $builder)
     {
         $this->amount(MoneyUtils::enforceAmountFormat($builder->getAmount()));
         $this->installmentUrl($builder->getInstallmentUrl());
